@@ -5,7 +5,6 @@ import {XpComponent} from "@/components/xp.component";
 import {PlayerLevelComponent} from "@/components/player-level.component";
 
 export class PlayerActor extends Actor {
-    // TODO add constant parameters
 
 
 
