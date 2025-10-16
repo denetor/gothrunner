@@ -4,6 +4,7 @@ import {PlayerActor} from "@/actors/player/player.actor";
 
 export class RunScene extends Scene {
     player: PlayerActor = null;
+    scrollSpeed: number = 100;
 
 
     constructor() {
@@ -32,5 +33,15 @@ export class RunScene extends Scene {
             collisionType: CollisionType.Fixed,
         });
         this.add(pavement);
+
+        // add first sections
+    }
+
+
+
+
+    onPostUpdate(engine: Engine, elapsedMs: number) {
+        // TODO if any section is no more visible, free it
+        // TODO if rightmost section is about to appear, create a new one
     }
 }
