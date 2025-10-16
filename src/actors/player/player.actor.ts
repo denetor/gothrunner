@@ -1,6 +1,8 @@
 import {Actor, CollisionType, Color, Engine} from "excalibur";
 import {KeybindingsService} from "@/services/keybindings.service";
 import {Keybindings} from "@/enums/keybindings.enum";
+import {XpComponent} from "@/components/xp.component";
+import {PlayerLevelComponent} from "@/components/player-level.component";
 
 export class PlayerActor extends Actor {
     // TODO add constant parameters
@@ -23,7 +25,11 @@ export class PlayerActor extends Actor {
         super.onInitialize(engine);
         this.name = 'player';
         this.addTag('player');
-        // TODO add components
+
+        // components
+        this.addComponent(new XpComponent());
+        this.addComponent(new PlayerLevelComponent());
+
         // TODO add colliders
         // TODO add graphics
     }

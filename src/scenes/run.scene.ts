@@ -1,9 +1,9 @@
 import {Actor, Color, Engine, Scene, vec} from "excalibur";
-import {Player} from "@/player";
 import {GameConstants} from "@/game-constants";
+import {PlayerActor} from "@/actors/player/player.actor";
 
 export class RunScene extends Scene {
-    player: Player = null;
+    player: PlayerActor = null;
 
 
     constructor() {
@@ -17,7 +17,7 @@ export class RunScene extends Scene {
         // TODO add systems
 
         // add player
-        this.player = new Player();
+        this.player = new PlayerActor();
         this.player.pos = vec(GameConstants.screenCenter.x, GameConstants.screenCenter.y);
         this.add(this.player);
 
