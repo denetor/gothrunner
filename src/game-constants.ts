@@ -1,10 +1,10 @@
 export const GameConstants = {
     viewport: {
-        x: 320,
-        y: 200,
+        x: 640,
+        y: 400,
     },
     screenCenter: {
-        x: 160,
-        y: 100,
+        x: 320,
+        y: 200,
     },
 } as const;

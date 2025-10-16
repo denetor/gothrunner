@@ -17,7 +17,7 @@ const game = new Engine({
     suppressPlayButton: true,
     physics: {
         solver: SolverStrategy.Arcade,
-        gravity: vec(0, 3),
+        gravity: vec(0, 98),
     },
     // physics: {
     //   solver: SolverStrategy.Realistic,

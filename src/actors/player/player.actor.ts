@@ -1,4 +1,4 @@
-import {Actor, CollisionType, Color, Engine} from "excalibur";
+import {Actor, CollisionType, Color, Engine, vec} from "excalibur";
 import {KeybindingsService} from "@/services/keybindings.service";
 import {Keybindings} from "@/enums/keybindings.enum";
 import {XpComponent} from "@/components/xp.component";
@@ -15,6 +15,8 @@ export class PlayerActor extends Actor {
             width: 10,
             height: 10,
             color: Color.White,
+            scale: vec(2.0, 2.0),
+            weight: 80,
         });
     }
 
