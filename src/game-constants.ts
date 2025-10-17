@@ -7,4 +7,5 @@ export const GameConstants = {
         x: 320,
         y: 200,
     },
+    baseScrollSpeed: 100,
 } as const;
