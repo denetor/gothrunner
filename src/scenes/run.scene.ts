@@ -21,6 +21,7 @@ export class RunScene extends Scene {
 
         // add systems
         this.world.add(SectionSpawnSystem);
+        // TODO this.world.add(FreePastSectionSystem);
 
         // add player
         this.player = new PlayerActor();
@@ -31,8 +32,7 @@ export class RunScene extends Scene {
 
 
 
-    onPostUpdate(engine: Engine, elapsedMs: number) {
-        // TODO if any section is no more visible, free it
-        // TODO if rightmost section is about to appear, create a new one
-    }
+    // onPostUpdate(engine: Engine, elapsedMs: number) {
+    //
+    // }
 }
