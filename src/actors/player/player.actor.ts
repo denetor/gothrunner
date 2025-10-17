@@ -48,7 +48,7 @@ export class PlayerActor extends Actor {
 
         }
         if (keyboard.isHeld(KeybindingsService.getKeyFor(Keybindings.PlayerUp))) {
-
+            this.vel.y = -100;
         } else if (keyboard.isHeld(KeybindingsService.getKeyFor(Keybindings.PlayerDown))) {
 
         }
