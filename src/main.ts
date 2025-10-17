@@ -1,6 +1,5 @@
 import {Color, DisplayMode, Engine, FadeInOut, SolverStrategy, vec} from "excalibur";
 import {loader} from "./resources";
-import {MyLevel} from "./level";
 import {GameConstants} from "@/game-constants";
 import {RunScene} from "@/scenes/run.scene";
 

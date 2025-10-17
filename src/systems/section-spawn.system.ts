@@ -1,6 +1,7 @@
 import {Scene, System, SystemPriority, SystemType, vec, World} from "excalibur";
 import {LevelSectionActor} from "@/actors/level-section.actor";
 import {GameConstants} from "@/game-constants";
+import {SectionFactoryService} from "@/services/section-factory.service";
 
 
 /**
@@ -33,7 +34,7 @@ export class SectionSpawnSystem extends System {
         }
         // spawn new sections until covered entire screen (plus a buffer)
         while (maxXPosition < GameConstants.viewport.x + 128) {
-            const newSection = new LevelSectionActor();
+            const newSection = SectionFactoryService.getSection();
             newSection.pos.x = maxXPosition;
             newSection.vel = vec(-GameConstants.baseScrollSpeed, 0);
             this.scene.add(newSection);
