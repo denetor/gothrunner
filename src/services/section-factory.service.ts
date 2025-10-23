@@ -9,6 +9,7 @@ export class SectionFactoryService {
 
 
     public static getSection(): LevelSectionActor {
+        return new FlatSectionActor();
         const r = Math.random();
         if ( r < 0.1) {
             return new HoleSectionActor();

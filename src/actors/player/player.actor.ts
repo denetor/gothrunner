@@ -5,6 +5,7 @@ import {XpComponent} from "@/components/xp.component";
 import {PlayerLevelComponent} from "@/components/player-level.component";
 
 export class PlayerActor extends Actor {
+    onGround: boolean = false;
 
 
 
@@ -34,10 +35,23 @@ export class PlayerActor extends Actor {
         // child actor to detect when actor is on ground
         const groundSensor = new Actor({
             width: 10,
-            height: 1,
-            pos: vec(0, 6),
+            height: 2,
+            pos: vec(0, 5),
             collisionType: CollisionType.Passive,
             color: Color.fromRGB(255, 255, 0, 0.5),
+        });
+        groundSensor.on('collisionstart', (ev) => {
+            console.log(ev.other.owner.tags);
+            if (ev?.other?.owner?.tags && ev.other.owner.tags.has('walkable')) {
+                console.log('on ground');
+                this.onGround = true;
+            }
+        });
+        groundSensor.on('collisionend', (ev) => {
+            if (ev?.other?.owner?.tags && ev.other.owner.tags.has('walkable')) {
+                console.log('off ground');
+                this.onGround = false;
+            }
         });
         this.addChild(groundSensor);
 
@@ -50,13 +64,12 @@ export class PlayerActor extends Actor {
         super.onPreUpdate(engine, elapsedMs);
 
         const keyboard = engine.input.keyboard;
-        // TODO detect terrain contact and allow movement only when on ground
-        if (keyboard.isHeld(KeybindingsService.getKeyFor(Keybindings.PlayerRight))) {
+        if (this.onGround && keyboard.isHeld(KeybindingsService.getKeyFor(Keybindings.PlayerRight))) {
             this.vel.x += 10;
-        } else if (keyboard.isHeld(KeybindingsService.getKeyFor(Keybindings.PlayerLeft))) {
+        } else if (this.onGround && keyboard.isHeld(KeybindingsService.getKeyFor(Keybindings.PlayerLeft))) {
             this.vel.x -= 10;
         }
-        if (keyboard.isHeld(KeybindingsService.getKeyFor(Keybindings.PlayerUp))) {
+        if (this.onGround && keyboard.isHeld(KeybindingsService.getKeyFor(Keybindings.PlayerUp))) {
             this.vel.y = -100;
         } else if (keyboard.isHeld(KeybindingsService.getKeyFor(Keybindings.PlayerDown))) {
             // TODO duck and slide

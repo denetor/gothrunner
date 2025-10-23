@@ -11,6 +11,7 @@ export class FlatSectionActor extends LevelSectionActor {
             height: GameConstants.viewport.y,
             anchor: vec(0,0),
             color: Color.Transparent,
+            collisionType: CollisionType.PreventCollision,
         });
     }
 
@@ -25,8 +26,9 @@ export class FlatSectionActor extends LevelSectionActor {
             anchor: vec(0, 0),
             pos: vec(0, this.height * 0.75 - 20),
             collisionType: CollisionType.Fixed,
-            color: Color.White,
+            color: Color.White.darken(Math.random()*0.8),
         });
+        floor.addTag('walkable');
         this.addChild(floor);
     }
 }
