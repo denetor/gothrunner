@@ -4,6 +4,7 @@ import {PlayerActor} from "@/actors/player/player.actor";
 import {LevelSectionActor} from "@/actors/level-section.actor";
 import {SectionSpawnSystem} from "@/systems/section-spawn.system";
 import {FreePastSectionSystem} from "@/systems/free-past-section.system";
+import {KeepPlayerScreenboundSystem} from "@/systems/keep-player-screenbound.system";
 
 export class RunScene extends Scene {
     player: PlayerActor = null;
@@ -22,6 +23,7 @@ export class RunScene extends Scene {
         // add systems
         this.world.add(SectionSpawnSystem);
         this.world.add(FreePastSectionSystem);
+        this.world.add(KeepPlayerScreenboundSystem);
 
         // add player
         this.player = new PlayerActor();
