@@ -1,4 +1,6 @@
 import {Actor, CollisionType, Color, Engine, vec} from "excalibur";
+import {HpComponent} from "@/components/hp.component";
+import {LivesComponent} from "@/components/lives.component";
 
 export class NpcActor extends Actor {
 
@@ -16,10 +18,13 @@ export class NpcActor extends Actor {
     }
 
 
-    onInitialize(engine: Engine) {
+    onInitialize(engine: Engine, options?: any) {
         super.onInitialize(engine);
-        this.name = 'npc';
+        this.name = options?.name ?? 'npc';
         this.addTag('creature');
         this.addTag('npc');
+
+        this.addComponent(new HpComponent(options?.hp ?? 20));
+        this.addComponent(new LivesComponent(options?.lives ?? 1));
     }
 }

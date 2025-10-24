@@ -7,6 +7,7 @@ import {FreePastSectionSystem} from "@/systems/free-past-section.system";
 import {KeepPlayerScreenboundSystem} from "@/systems/keep-player-screenbound.system";
 import {DetectPlayerFalldownSystem} from "@/systems/detect-player-falldown.system";
 import {DetectPlayerLeftBehindSystem} from "@/systems/detect-player-leftbehind.system";
+import {DetectDeathByHpSystem} from "@/systems/detect-death-by-hp.system";
 
 export class RunScene extends Scene {
     player: PlayerActor = null;
@@ -28,6 +29,7 @@ export class RunScene extends Scene {
         this.world.add(KeepPlayerScreenboundSystem);
         this.world.add(DetectPlayerFalldownSystem);
         this.world.add(DetectPlayerLeftBehindSystem);
+        this.world.add(DetectDeathByHpSystem);
 
         // add player
         this.player = new PlayerActor();

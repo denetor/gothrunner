@@ -1,23 +1,26 @@
-import {System, SystemPriority, SystemType, World} from "excalibur";
+import {Actor, Query, System, SystemPriority, SystemType, World} from "excalibur";
 import {GameConstants} from "@/game-constants";
+import {HpComponent} from "@/components/hp.component";
 
 export class DetectPlayerFalldownSystem extends System {
-    protected query: any;
+    query: Query<typeof HpComponent>;
     public priority = SystemPriority.Lower;
     public systemType = SystemType.Update;
 
 
     constructor(world: World) {
         super();
-        this.query = world.queryTags(['player']);
+        this.query = world.query([HpComponent]);
     }
 
 
     public update(delta: number) {
-        if (this.query && this.query.entities && this.query.entities.length > 0) {
-            for (const player of this.query.entities) {
-                if (player.pos.y >= GameConstants.viewport.y) {
-                    console.log('Player dead: fallen down!');
+        if (this.query && this.query.entities) {
+            for (const actor of this.query.entities) {
+                const hpComponent = actor.get(HpComponent);
+                if ((actor as Actor).pos.y >= GameConstants.viewport.y) {
+                    console.log('Actor fallen in the abyss');
+                    hpComponent.hp = 0;
                 }
             }
         }

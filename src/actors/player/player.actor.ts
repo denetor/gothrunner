@@ -4,6 +4,8 @@ import {Keybindings} from "@/enums/keybindings.enum";
 import {XpComponent} from "@/components/xp.component";
 import {PlayerLevelComponent} from "@/components/player-level.component";
 import {GameConstants} from "@/game-constants";
+import {HpComponent} from "@/components/hp.component";
+import {LivesComponent} from "@/components/lives.component";
 
 export class PlayerActor extends Actor {
     onGround: boolean = false;
@@ -33,6 +35,8 @@ export class PlayerActor extends Actor {
         // components
         this.addComponent(new XpComponent());
         this.addComponent(new PlayerLevelComponent());
+        this.addComponent(new HpComponent());
+        this.addComponent(new LivesComponent());
 
         // TODO add graphics
     }
