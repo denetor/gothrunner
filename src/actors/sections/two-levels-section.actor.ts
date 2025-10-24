@@ -18,6 +18,7 @@ export class TwoLevelsSectionActor extends FlatSectionActor {
             collisionType: CollisionType.Fixed,
             color: Color.White,
         });
+        // TODO seems not considering this tag (wont jump here)
         upperFloor.addTag('walkable');
         this.addChild(upperFloor);
     }

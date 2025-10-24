@@ -3,6 +3,7 @@ import {KeybindingsService} from "@/services/keybindings.service";
 import {Keybindings} from "@/enums/keybindings.enum";
 import {XpComponent} from "@/components/xp.component";
 import {PlayerLevelComponent} from "@/components/player-level.component";
+import {GameConstants} from "@/game-constants";
 
 export class PlayerActor extends Actor {
     onGround: boolean = false;
@@ -65,12 +66,12 @@ export class PlayerActor extends Actor {
 
         const keyboard = engine.input.keyboard;
         if (this.onGround && keyboard.isHeld(KeybindingsService.getKeyFor(Keybindings.PlayerRight))) {
-            this.vel.x += 10;
+            this.vel.x += GameConstants.player.speedIncrements;
         } else if (this.onGround && keyboard.isHeld(KeybindingsService.getKeyFor(Keybindings.PlayerLeft))) {
-            this.vel.x -= 10;
+            this.vel.x -= GameConstants.player.speedIncrements;
         }
         if (this.onGround && keyboard.isHeld(KeybindingsService.getKeyFor(Keybindings.PlayerUp))) {
-            this.vel.y = -100;
+            this.vel.y = 0 - GameConstants.player.jumpVelocity;
         } else if (keyboard.isHeld(KeybindingsService.getKeyFor(Keybindings.PlayerDown))) {
             // TODO duck and slide
         }

@@ -7,7 +7,6 @@ import {FreePastSectionSystem} from "@/systems/free-past-section.system";
 
 export class RunScene extends Scene {
     player: PlayerActor = null;
-    scrollSpeed: number = 100;
 
 
     constructor() {

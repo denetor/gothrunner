@@ -8,4 +8,11 @@ export const GameConstants = {
         y: 200,
     },
     baseScrollSpeed: 100,
+    physics: {
+        gravity: 512,
+    },
+    player: {
+        jumpVelocity: 320,
+        speedIncrements: 10,
+    }
 } as const;
