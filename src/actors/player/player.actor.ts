@@ -1,4 +1,4 @@
-import {Actor, CollisionType, Color, Engine, Shape, vec} from "excalibur";
+import {Actor, CollisionType, Color, Engine, Ray, Shape, vec, Vector} from "excalibur";
 import {KeybindingsService} from "@/services/keybindings.service";
 import {Keybindings} from "@/enums/keybindings.enum";
 import {XpComponent} from "@/components/xp.component";
@@ -32,29 +32,6 @@ export class PlayerActor extends Actor {
         this.addComponent(new XpComponent());
         this.addComponent(new PlayerLevelComponent());
 
-        // child actor to detect when actor is on ground
-        const groundSensor = new Actor({
-            width: 10,
-            height: 2,
-            pos: vec(0, 5),
-            collisionType: CollisionType.Passive,
-            color: Color.fromRGB(255, 255, 0, 0.5),
-        });
-        groundSensor.on('collisionstart', (ev) => {
-            console.log(ev.other.owner.tags);
-            if (ev?.other?.owner?.tags && ev.other.owner.tags.has('walkable')) {
-                console.log('on ground');
-                this.onGround = true;
-            }
-        });
-        groundSensor.on('collisionend', (ev) => {
-            if (ev?.other?.owner?.tags && ev.other.owner.tags.has('walkable')) {
-                console.log('off ground');
-                this.onGround = false;
-            }
-        });
-        this.addChild(groundSensor);
-
         // TODO add graphics
     }
 
@@ -62,6 +39,21 @@ export class PlayerActor extends Actor {
 
     onPreUpdate(engine: Engine, elapsedMs: number) {
         super.onPreUpdate(engine, elapsedMs);
+
+        // raycast to test if on ground
+        let hitGround = false;
+        const ray = new Ray(vec(this.pos.x, this.pos.y), Vector.Down);
+        const hits = engine.currentScene.physics.rayCast(ray, {
+            maxDistance: this.height,
+        });
+        if (hits && hits.length > 0) {
+            for (const hit of hits) {
+                if (hit && hit.collider && hit.collider.owner && hit.collider.owner.hasTag('walkable')) {
+                    hitGround = true;
+                }
+            }
+        }
+        this.onGround = hitGround;
 
         const keyboard = engine.input.keyboard;
         if (this.onGround && keyboard.isHeld(KeybindingsService.getKeyFor(Keybindings.PlayerRight))) {
@@ -75,7 +67,7 @@ export class PlayerActor extends Actor {
             // TODO duck and slide
         }
 
-        // TODO ass normal and special attacks
+        // TODO add normal and special attacks
     }
 
 

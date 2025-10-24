@@ -28,6 +28,7 @@ export class HoleSectionActor extends LevelSectionActor {
             collisionType: CollisionType.Fixed,
             color: Color.White,
         });
+        floor.addTag('walkable');
         this.addChild(floor);
     }
 }

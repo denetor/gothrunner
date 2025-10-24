@@ -20,6 +20,7 @@ export class StairsSectionActor extends FlatSectionActor {
                 collisionType: CollisionType.Fixed,
                 color: Color.White,
             });
+            obstacle.addTag('walkable');
             this.addChild(obstacle);
         }
     }
