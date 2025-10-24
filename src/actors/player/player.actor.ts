@@ -41,7 +41,6 @@ export class PlayerActor extends Actor {
         super.onPreUpdate(engine, elapsedMs);
 
         // raycast to test if on ground
-        let hitGround = false;
         const rayL = new Ray(vec(this.pos.x-4, this.pos.y), Vector.Down);
         const rayR = new Ray(vec(this.pos.x+4, this.pos.y), Vector.Down);
         const hitsL = engine.currentScene.physics.rayCast(rayL, {
@@ -51,11 +50,15 @@ export class PlayerActor extends Actor {
             maxDistance: this.height,
         });
         const hits = ((hitsL && hitsL.length > 0) ? hitsL : []).concat((hitsR && hitsR.length > 0) ? hitsR : []);
+        let hitGround = false;
         if (hits && hits.length > 0) {
-            for (const hit of hits) {
+            let i = 0;
+            while (!hitGround && i < hits.length) {
+                const hit = hits[i];
                 if (hit && hit.collider && hit.collider.owner && hit.collider.owner.hasTag('walkable')) {
                     hitGround = true;
                 }
+                i++;
             }
         }
         this.onGround = hitGround;
