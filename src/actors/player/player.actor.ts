@@ -27,6 +27,7 @@ export class PlayerActor extends Actor {
     onInitialize(engine: Engine) {
         super.onInitialize(engine);
         this.name = 'player';
+        this.addTag('creature');
         this.addTag('player');
 
         // components
@@ -67,8 +68,14 @@ export class PlayerActor extends Actor {
         const keyboard = engine.input.keyboard;
         if (this.onGround && keyboard.isHeld(KeybindingsService.getKeyFor(Keybindings.PlayerRight))) {
             this.vel.x += GameConstants.player.speedIncrements;
+            if (this.vel.x > GameConstants.player.maxSpeed) {
+                this.vel.x = GameConstants.player.maxSpeed;
+            }
         } else if (this.onGround && keyboard.isHeld(KeybindingsService.getKeyFor(Keybindings.PlayerLeft))) {
             this.vel.x -= GameConstants.player.speedIncrements;
+            if (this.vel.x < - GameConstants.player.maxSpeed) {
+                this.vel.x = 0 - GameConstants.player.maxSpeed;
+            }
         }
         if (this.onGround && keyboard.isHeld(KeybindingsService.getKeyFor(Keybindings.PlayerUp))) {
             this.vel.y = 0 - GameConstants.player.jumpVelocity;

@@ -2,6 +2,7 @@ import {Scene, System, SystemPriority, SystemType, vec, World} from "excalibur";
 import {LevelSectionActor} from "@/actors/level-section.actor";
 import {GameConstants} from "@/game-constants";
 import {SectionFactoryService} from "@/services/section-factory.service";
+import {EnemiesFactoryService} from "@/services/enemies-factory.service";
 
 
 /**
@@ -32,6 +33,7 @@ export class SectionSpawnSystem extends System {
                 }
             }
         }
+
         // spawn new sections until covered entire screen (plus a buffer)
         while (maxXPosition < GameConstants.viewport.x + 128) {
             const newSection = SectionFactoryService.getSection();
@@ -39,7 +41,14 @@ export class SectionSpawnSystem extends System {
             newSection.vel = vec(-GameConstants.baseScrollSpeed, 0);
             this.scene.add(newSection);
             maxXPosition = newSection.pos.x + newSection.width;
-            console.log(`Added new section at x: ${maxXPosition}`);
+
+            // add npcs to the new section
+            const npcs = EnemiesFactoryService.getRandomEnemies(newSection);
+            if (npcs && npcs.length > 0) {
+                for (const npc of npcs) {
+                    this.scene.add(npc);
+                }
+            }
         }
     }
 

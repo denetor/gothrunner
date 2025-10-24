@@ -26,7 +26,7 @@ export class FlatSectionActor extends LevelSectionActor {
             anchor: vec(0, 0),
             pos: vec(0, this.height * 0.75 - 20),
             collisionType: CollisionType.Fixed,
-            color: Color.White.darken(Math.random()*0.8),
+            color: Color.White,
         });
         floor.addTag('walkable');
         this.addChild(floor);

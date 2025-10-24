@@ -18,6 +18,7 @@ export class TwoLevelsSectionActor extends FlatSectionActor {
             collisionType: CollisionType.Fixed,
             color: Color.White,
         });
+        upperFloor.addTag('walkable');
         this.addChild(upperFloor);
     }
 }
