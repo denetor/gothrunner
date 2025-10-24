@@ -19,7 +19,6 @@ export class DetectPlayerFalldownSystem extends System {
             for (const actor of this.query.entities) {
                 const hpComponent = actor.get(HpComponent);
                 if ((actor as Actor).pos.y >= GameConstants.viewport.y) {
-                    console.log('Actor fallen in the abyss');
                     hpComponent.hp = 0;
                 }
             }

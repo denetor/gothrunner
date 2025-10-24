@@ -1,5 +1,6 @@
 import {System, SystemPriority, SystemType, World} from "excalibur";
 import {GameConstants} from "@/game-constants";
+import {HpComponent} from "@/components/hp.component";
 
 export class DetectPlayerLeftBehindSystem extends System {
     protected query: any;
@@ -17,7 +18,11 @@ export class DetectPlayerLeftBehindSystem extends System {
         if (this.query && this.query.entities && this.query.entities.length > 0) {
             for (const player of this.query.entities) {
                 if (player.pos.x <= 0) {
-                    console.log('Player dead: left behind!');
+                    const hpComponent = player.get(HpComponent);
+                    // TODO remove some HPs instead of sudden death
+                    if (hpComponent) {
+                        hpComponent.hp = 0;
+                    }
                 }
             }
         }
