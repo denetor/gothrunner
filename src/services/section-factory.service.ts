@@ -4,6 +4,7 @@ import {HoleSectionActor} from "@/actors/sections/hole-section.actor";
 import {StairsSectionActor} from "@/actors/sections/stairs-section.actor";
 import {ObstacleSectionActor} from "@/actors/sections/obstacle-section.actor";
 import {TwoLevelsSectionActor} from "@/actors/sections/two-levels-section.actor";
+import {MazeSectionActor} from "@/actors/sections/maze-section.actor";
 
 export class SectionFactoryService {
 
@@ -19,6 +20,8 @@ export class SectionFactoryService {
             return new ObstacleSectionActor();
         } else if ( r < 0.4) {
             return new TwoLevelsSectionActor();
+        } else if ( r < 0.5) {
+            return new MazeSectionActor();
         } else {
             return new FlatSectionActor();
         }
