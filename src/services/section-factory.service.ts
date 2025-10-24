@@ -9,8 +9,16 @@ import {MazeSectionActor} from "@/actors/sections/maze-section.actor";
 export class SectionFactoryService {
 
 
-    public static getSection(): LevelSectionActor {
-        // return new FlatSectionActor();
+    /**
+     * Generates and returns a section actor for a level based on randomized probability.
+     *
+     * @param {boolean} newStart - Determines if the section generation corresponds to a new start for the level.
+     * @return {LevelSectionActor} A specific type of LevelSectionActor, chosen randomly from available section actors.
+     */
+    public static getSection(newStart: boolean): LevelSectionActor {
+        if (newStart) {
+            return new FlatSectionActor();
+        }
         const r = Math.random();
         if ( r < 0.1) {
             return new HoleSectionActor();
